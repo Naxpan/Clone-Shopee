@@ -1,0 +1,22 @@
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import enTranslations from "./assets/data/lang-en.json";
+import viTranslations from "./assets/data/lang-vi.json";
+
+i18n.use(initReactI18next).init({
+  resources: {
+    en: {
+      translation: enTranslations,
+    },
+    vi: {
+      translation: viTranslations,
+    },
+  },
+  lng: localStorage.getItem("language") || "vi",
+  fallbackLng: "vi",
+  interpolation: {
+    escapeValue: false,
+  },
+});
+
+export default i18n;

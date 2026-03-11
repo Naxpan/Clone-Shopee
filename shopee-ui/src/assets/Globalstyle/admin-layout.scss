@@ -1,0 +1,344 @@
+@use "variables" as *;
+@use "sass:color";
+
+// ==================== ADMIN VARIABLES ====================
+$admin-sidebar-width: 240px;
+$admin-header-height: 60px;
+
+// ==================== ADMIN LAYOUT ====================
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.admin-layout__body {
+  flex: 1;
+  margin-left: $admin-sidebar-width;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-layout__content {
+  flex: 1;
+  padding: 24px;
+  margin-top: $admin-header-height;
+}
+
+// ==================== ADMIN SIDEBAR ====================
+.admin-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: $admin-sidebar-width;
+  background-color: #fff;
+  border-right: 1px solid #e8e8e8;
+  display: flex;
+  flex-direction: column;
+  z-index: 200;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  // Scrollbar mỏng
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #e0e0e0;
+    border-radius: 4px;
+  }
+}
+
+.admin-sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 20px;
+  height: $admin-header-height;
+  background-color: #fff;
+  flex-shrink: 0;
+}
+
+.admin-sidebar__brand-icon {
+  font-size: 2rem;
+  color: var(--primary-color);
+}
+
+.admin-sidebar__brand-text {
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  color: var(--primary-color);
+}
+
+.admin-sidebar__nav {
+  flex: 1;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+// Item dùng chung cho NavLink và div group
+.admin-sidebar__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 16px;
+  font-size: 1.4rem;
+  color: #555;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    color 0.15s;
+  user-select: none;
+
+  &:hover {
+    background-color: #fff4f2;
+    color: $primary-color;
+
+    .admin-sidebar__item-icon {
+      color: $primary-color;
+    }
+  }
+
+  // NavLink tự add class active khi route match
+  &.active {
+    background-color: $primary-color;
+    color: #ffe9e3;
+    font-weight: 600;
+
+    .admin-sidebar__item-icon {
+      color: #ffe9e3;
+    }
+  }
+
+  &--group {
+    // Item kiểu div (có submenu)
+    &.active {
+      background-color: $primary-color;
+      color: #ffe9e3;
+    }
+  }
+}
+
+.admin-sidebar__item-icon {
+  font-size: 1.4rem;
+  color: #999;
+  width: 18px;
+  text-align: center;
+  flex-shrink: 0;
+  transition: color 0.15s;
+}
+
+.admin-sidebar__item-chevron {
+  margin-left: auto;
+  font-size: 1.1rem;
+  color: #bbb;
+  transition: transform 0.2s;
+}
+
+// Submenu container
+.admin-sidebar__submenu {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 2px 8px 4px 34px;
+}
+
+// Submenu item (NavLink)
+.admin-sidebar__subitem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  font-size: 1.35rem;
+  color: #666;
+  border-radius: 4px;
+  text-decoration: none;
+  transition:
+    background-color 0.15s,
+    color 0.15s;
+
+  &:hover {
+    background-color: #fff4f2;
+    color: $primary-color;
+
+    .admin-sidebar__item-icon {
+      color: $primary-color;
+    }
+  }
+
+  &.active {
+    background-color: #ffe9e3;
+    color: $primary-color;
+    font-weight: 600;
+
+    .admin-sidebar__item-icon {
+      color: $primary-color;
+    }
+  }
+}
+
+// Footer với Settings
+.admin-sidebar__footer {
+  padding: 8px 8px 16px;
+  border-top: 1px solid #e8e8e8;
+  flex-shrink: 0;
+}
+
+// ==================== ADMIN HEADER ====================
+.admin-header {
+  position: fixed;
+  top: 0;
+  left: $admin-sidebar-width;
+  right: 0;
+  height: $admin-header-height;
+  background-color: #fff;
+  border-bottom: 1px solid #e8e8e8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 100;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.admin-header__search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  padding: 0 14px;
+  width: 300px;
+  height: 38px;
+  border: 1px solid #e8e8e8;
+  transition:
+    border-color 0.2s,
+    background-color 0.2s;
+
+  &:focus-within {
+    border-color: $primary-color;
+    background-color: #fff;
+  }
+}
+
+.admin-header__search-icon {
+  font-size: 1.3rem;
+  color: #aaa;
+  flex-shrink: 0;
+}
+
+.admin-header__search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 1.4rem;
+  color: #333;
+
+  &::placeholder {
+    color: #bbb;
+  }
+}
+
+.admin-header__user {
+  position: relative;
+}
+
+.admin-header__user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px 4px 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.15s;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+}
+
+.admin-header__avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-image: linear-gradient(0deg, #fe6433, #f53e2d);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.admin-header__avatar-icon {
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.admin-header__user-name {
+  font-size: 1.4rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.admin-header__user-chevron {
+  font-size: 1rem;
+  color: #999;
+}
+
+.admin-header__user-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+  list-style: none;
+  padding: 4px 0;
+  margin: 0;
+  min-width: 160px;
+  z-index: 100;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    right: 16px;
+    border-width: 0 6px 6px;
+    border-style: solid;
+    border-color: transparent transparent #fff transparent;
+    filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, 0.06));
+  }
+}
+
+.admin-header__user-menu-item {
+  button,
+  a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 16px;
+    font-size: 1.4rem;
+    color: #333;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    white-space: nowrap;
+    font-family: inherit;
+
+    &:hover {
+      background-color: #f5f5f5;
+      color: $primary-color;
+    }
+  }
+}

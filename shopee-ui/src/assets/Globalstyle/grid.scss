@@ -1,0 +1,238 @@
+@use "variables" as *;
+@use "sass:math";
+
+.grid {
+  width: 100%;
+  display: block;
+  padding: 0;
+
+  &.wide {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -4px;
+  margin-right: -4px;
+
+  &.no-gutters {
+    margin-left: 0;
+    margin-right: 0;
+
+    .col {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}
+
+.col {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.c-0 {
+  display: none;
+}
+
+@for $i from 1 through 12 {
+  .c-#{$i} {
+    flex: 0 0 math.percentage(math.div($i, 12));
+    max-width: math.percentage(math.div($i, 12));
+  }
+}
+
+.c-5-1 {
+  flex: 0 0 48%;
+  max-width: 48%;
+}
+
+@for $i from 1 through 11 {
+  .c-o-#{$i} {
+    margin-left: math.percentage(math.div($i, 12));
+  }
+}
+
+/* >= Tablet */
+@media (min-width: 740px) {
+  .row {
+    margin-left: -8px;
+    margin-right: -8px;
+  }
+
+  .col {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .m-0 {
+    display: none;
+  }
+
+  @for $i from 1 through 12 {
+    .m-#{$i} {
+      display: block;
+      flex: 0 0 math.percentage(math.div($i, 12));
+      max-width: math.percentage(math.div($i, 12));
+    }
+  }
+
+  .m-4 {
+    flex: 0 0 37%;
+    max-width: 37%;
+  }
+
+  @for $i from 1 through 11 {
+    .m-o-#{$i} {
+      margin-left: math.percentage(math.div($i, 12));
+    }
+  }
+}
+
+/* PC medium resolution > */
+@media (min-width: 1113px) {
+  .row {
+    margin-left: -12px;
+    margin-right: -12px;
+
+    &.sm-gutter {
+      margin-left: -5px;
+      margin-right: -5px;
+
+      .col {
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+    }
+  }
+
+  .col {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .l-0 {
+    display: none;
+  }
+
+  .l-1,
+  .l-2,
+  .l-2-4,
+  .l-2-5,
+  .l-3,
+  .l-4,
+  .l-5,
+  .l-6,
+  .l-7,
+  .l-8,
+  .l-9,
+  .l-10,
+  .l-11,
+  .l-12 {
+    display: block;
+  }
+
+  @for $i from 1 through 12 {
+    .l-#{$i} {
+      flex: 0 0 math.percentage(math.div($i, 12));
+      max-width: math.percentage(math.div($i, 12));
+    }
+  }
+
+  .l-2-4 {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+
+  .l-2-5 {
+    flex: 0 0 23.5%;
+    max-width: 23.5%;
+  }
+
+  @for $i from 1 through 11 {
+    .l-o-#{$i} {
+      margin-left: math.percentage(math.div($i, 12));
+    }
+  }
+}
+
+/* Tablet - PC low resolution */
+@media (min-width: 740px) and (max-width: 1023px) {
+  .wide {
+    width: 644px;
+  }
+}
+
+/* > PC low resolution */
+@media (min-width: 1024px) and (max-width: 1239px) {
+  .wide {
+    width: 984px;
+
+    .row {
+      margin-left: -12px;
+      margin-right: -12px;
+
+      &.sm-gutter {
+        margin-left: -5px;
+        margin-right: -5px;
+
+        .col {
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+    }
+
+    .col {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+
+    .l-0 {
+      display: none;
+    }
+
+    .l-1,
+    .l-2,
+    .l-2-4,
+    .l-2-5,
+    .l-3,
+    .l-4,
+    .l-5,
+    .l-6,
+    .l-7,
+    .l-8,
+    .l-9,
+    .l-10,
+    .l-11,
+    .l-12 {
+      display: block;
+    }
+
+    @for $i from 1 through 12 {
+      .l-#{$i} {
+        flex: 0 0 math.percentage(math.div($i, 12));
+        max-width: math.percentage(math.div($i, 12));
+      }
+    }
+
+    .l-2-4 {
+      flex: 0 0 20%;
+      max-width: 20%;
+    }
+
+    .l-2-5 {
+      flex: 0 0 23.5%;
+      max-width: 23.5%;
+    }
+
+    @for $i from 1 through 11 {
+      .l-o-#{$i} {
+        margin-left: math.percentage(math.div($i, 12));
+      }
+    }
+  }
+}

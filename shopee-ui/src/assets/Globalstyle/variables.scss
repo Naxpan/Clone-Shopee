@@ -1,0 +1,14 @@
+// Variables SCSS cho Demo Shopee
+// Colors
+$primary-color: #ee4d2d;
+$white-color: #fff;
+$black-color: #000;
+$text-color: #333;
+$border-color: #dbdbdb;
+$star-gold-color: #ffcc00;
+
+// Layout
+$header-height: 120px;
+$navbar-height: 28px;
+$header-with-search-height: calc($header-height - $navbar-height);
+$header-sort-bar-height: 46px;
